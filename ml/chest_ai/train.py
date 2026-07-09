@@ -20,13 +20,10 @@ def parse_args():
     parser.add_argument("--batch-size", type=int, help="Batch size.")
     parser.add_argument("--lr", type=float, help="Learning rate.")
     parser.add_argument("--backbone", type=str, help="Model backbone (densenet121, efficientnet_b0, etc.).")
-    parser.add_argument(
-        "--uncertainty-policy",
-        type=str,
-        choices=["U-Zeros", "U-Ones", "U-Ignore"],
-        help="Policy for uncertainty labels."
-    )
+    parser.add_argument("--uncertainty-policy", type=str, choices=["U-Zeros", "U-Ones", "U-Ignore"], help="Policy for uncertainty labels.")
     parser.add_argument("--resume", type=str, help="Path to checkpoint to resume training from.")
+    parser.add_argument("--csv-train-path", type=str, help="Path to train CSV relative to data-dir.")
+    parser.add_argument("--csv-valid-path", type=str, help="Path to valid CSV relative to data-dir.")
     return parser.parse_args()
 
 def main():
@@ -45,6 +42,10 @@ def main():
         settings.model.backbone = args.backbone
     if args.uncertainty_policy:
         settings.data.uncertainty_policy = args.uncertainty_policy
+    if args.csv_train_path:
+        settings.data.csv_train_path = args.csv_train_path
+    if args.csv_valid_path:
+        settings.data.csv_valid_path = args.csv_valid_path
         
     # 2. Local mode: check/generate synthetic dataset
     if settings.data.mode == "local" and not os.path.exists(settings.data.data_dir):
