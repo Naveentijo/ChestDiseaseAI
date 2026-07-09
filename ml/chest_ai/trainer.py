@@ -47,6 +47,7 @@ class Trainer:
         
         # Setup device
         self.model.to(self.device)
+        self.loss_fn.to(self.device)
         
         # Setup Mixed Precision
         self.use_amp = self.settings.training.mixed_precision and self.device == "cuda"
