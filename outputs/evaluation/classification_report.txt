@@ -1,0 +1,37 @@
+=== ChestDiseaseAI Evaluation Report ===
+Checkpoint: ./ml/checkpoints/best_model.pth
+Macro AUROC: 0.5087
+Macro F1-Score: 0.3357
+Macro Accuracy: 0.4625
+
+Per-Class Details:
+Atelectasis:
+  AUROC:     0.3125
+  F1-Score:  0.4000
+  Precision: 0.2500
+  Recall:    1.0000
+  Accuracy:  0.2500
+Cardiomegaly:
+  AUROC:     0.4531
+  F1-Score:  0.0000
+  Precision: 0.0000
+  Recall:    0.0000
+  Accuracy:  0.5000
+Consolidation:
+  AUROC:     0.5156
+  F1-Score:  0.3077
+  Precision: 0.4000
+  Recall:    0.2500
+  Accuracy:  0.4375
+Edema:
+  AUROC:     0.6909
+  F1-Score:  0.5263
+  Precision: 0.3571
+  Recall:    1.0000
+  Accuracy:  0.4375
+Pleural Effusion:
+  AUROC:     0.5714
+  F1-Score:  0.4444
+  Precision: 1.0000
+  Recall:    0.2857
+  Accuracy:  0.6875
