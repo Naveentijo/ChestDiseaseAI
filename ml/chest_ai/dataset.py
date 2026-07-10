@@ -109,6 +109,20 @@ class CheXpertDataset(BaseDataset):
             
         # Read image
         if not os.path.exists(img_path):
+            # Fallback 1: Strip 'CheXpert-v1.0-small/' prefix if dataset root is unzipped directly
+            if rel_img_path.startswith("CheXpert-v1.0-small/"):
+                stripped_path = rel_img_path[len("CheXpert-v1.0-small/"):]
+                alt_path = os.path.join(self.data_dir, stripped_path)
+                if os.path.exists(alt_path):
+                    img_path = alt_path
+            # Fallback 2: Prepend 'CheXpert-v1.0-small/' prefix if dataset root is nested
+            elif not rel_img_path.startswith("CheXpert-v1.0-small/"):
+                prepended_path = os.path.join("CheXpert-v1.0-small", rel_img_path)
+                alt_path = os.path.join(self.data_dir, prepended_path)
+                if os.path.exists(alt_path):
+                    img_path = alt_path
+                    
+        if not os.path.exists(img_path):
             raise FileNotFoundError(f"Image not found at path: {img_path}")
             
         image = cv2.imread(img_path)
